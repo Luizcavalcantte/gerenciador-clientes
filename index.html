@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Cadastro</title>
+  </head>
+  <body>
+    <div class="conteudo">
+      <div id="editando" class="editando"></div>
+      <h1 class="titulo">Clientes</h1>
+      <div class="cadastro">
+        <input id="nome" type="text" placeholder="Nome" />
+        <input id="vencimento" type="number" placeholder="Vencimento" />
+        <input id="telefone" type="number" placeholder="Telefone" />
+
+        <button id="cadastrar" class="btn cadastrar" onclick="addUsuario()">
+          Cadastrar
+        </button>
+      </div>
+
+      <div id="dados" class="dados">
+        <table id="tabela"></table>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

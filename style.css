@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(4, 20, 29);
+  color: white;
+}
+.conteudo {
+  background-color: #322e5a;
+  text-align: center;
+  position: relative;
+  max-width: 500px;
+  margin: auto;
+  padding: 5px 0 10px 0;
+  margin-top: 30px;
+  border-radius: 10px;
+  border: rgb(173, 182, 189) 5px solid;
+}
+.titulo {
+  text-align: center;
+  margin: 5px 0 10px 0;
+}
+
+.cadastro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+input {
+  margin-bottom: 10px;
+  height: 35px;
+  padding-left: 5px;
+  width: 160px;
+}
+
+.cadastro button {
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  padding: 0px 5px 0px 5px;
+  margin-bottom: 10px;
+}
+
+.dados {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+td {
+  text-align: center;
+  padding: 5px;
+  background-color: gray;
+}
+
+.editar,
+.apagar {
+  width: 60px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+}
+.editar {
+  margin-bottom: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: rgb(150, 226, 182);
+  border: none;
+}
+
+.editando {
+  padding: 20px;
+  display: none;
+  justify-content: space-around;
+  justify-items: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  background-color: rgba(9, 188, 138, 0.9);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 10px;
+  border: rgb(173, 182, 189) 5px solid;
+  font-weight: bolder;
+  color: #183a37;
+}
+
+.editando button {
+  width: 100px;
+  height: 35px;
+}
+.editando input,
+.editando button {
+  margin: 10px;
+}
+
+.Sim {
+  background-color: rgb(51, 172, 51);
+}
+.Nao {
+  background-color: rgb(236, 70, 70);
+}
