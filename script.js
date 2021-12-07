@@ -129,7 +129,7 @@ function editar(i) {
         let todosUsuarios = doc.data().clientes;
         let temporario = ` <div id="${i}">
   <h3>Editando dados</h3>
-  <div class="inputsEditando"><div> <input id="editNome" type="text" value="${todosUsuarios[i].Nome}" placeholder="Nome" /> <input id="editVencimento" type="text" value="${todosUsuarios[i].Vencimento}" placeholder="Vencimento" /></div>
+  <div class="inputsEditando"><div> <input id="editNome" value="" type="text"  placeholder="${todosUsuarios[i].Nome}" /> <input id="editVencimento" type="text" value="${todosUsuarios[i].Vencimento}" placeholder="Vencimento" /></div>
   
   <div>  <input id="editTelefone" type="text" value="${todosUsuarios[i].Telefone}" placeholder="Telefone" /> <input id="editPago" type="text" value="${todosUsuarios[i].Pago}" placeholder="Pago" /></div>
   </div>
@@ -148,27 +148,72 @@ function cancelar() {
 }
 
 function confirmar(i) {
+  const editandoNome = document.getElementById("editNome").value;
+  const editandoVencimento = document.getElementById("editVencimento").value;
+  const editandoTelefone = document.getElementById("editTelefone").value;
+  const editandoPago = document.getElementById("editPago").value;
+
   editando.style.display = "none";
 
-  const editNome = document.getElementById("editNome");
-  const editVencimento = document.getElementById("editVencimento");
-  const editTelefone = document.getElementById("editTelefone");
-  const editPago = document.getElementById("editPago");
-
-  todosUsuarios[i].Nome = editNome.value;
-  todosUsuarios[i].Telefone = editVencimento.value;
-  todosUsuarios[i].Vencimento = editTelefone.value;
-  todosUsuarios[i].Pago = editPago.value;
-
-  editando.innerHTML = "";
-
-  atualizarTabela();
-
+  //
   db.collection("dados-clientes")
     .get()
     .then((snapshot) =>
       snapshot.forEach((doc) => {
+        console.log(editandoNome.value);
+
         let todosUsuarios = doc.data().clientes;
+
+        todosUsuarios[i].Nome = editandoNome;
+        todosUsuarios[i].Vencimento = editandoVencimento;
+        todosUsuarios[i].Telefone = editandoTelefone;
+        todosUsuarios[i].Pago = editandoPago;
+
+        //
+        db.collection("dados-clientes")
+          .doc("EoFbN8D2PNYrjMh7Wwjh")
+          .set({
+            //tem q ter pelomenos 1 dado diferente, se nao, nada acontece vv
+            clientes: todosUsuarios,
+          })
+          .then((doc) => {
+            atualizarTabela();
+            console.log("update feito com sucesso", doc);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        //
+
+        console.log(todosUsuarios);
       })
     );
+
+  //
+
+  editando.innerHTML = "";
+
+  atualizarTabela();
+}
+
+function abrirCadastro() {
+  let cadastro = document.getElementById("cadastro");
+
+  cadastro.style.display = "flex";
+}
+
+function fecharCadastro() {
+  let cadastro = document.getElementById("cadastro");
+
+  cadastro.style.display = "none";
+}
+
+function abrirLogin() {
+  let login = document.getElementById("janelaLogin");
+  login.style.display = "flex";
+}
+
+function fecharLogin() {
+  let login = document.getElementById("janelaLogin");
+  login.style.display = "none";
 }
