@@ -17,7 +17,13 @@
         <button onclick="abrirLogin()" id="login">Login</button>
       </div>
       <div id="cadastro" class="cadastro">
-        <button id="fecharCadastro" onclick="fecharCadastro()">X</button>
+        <button
+          class="btnFechar"
+          id="fecharCadastro"
+          onclick="fecharCadastro()"
+        >
+          X
+        </button>
         <input id="nome" type="text" placeholder="Nome" />
         <input id="vencimento" type="number" placeholder="Vencimento" />
         <input id="telefone" type="number" placeholder="Telefone" />
@@ -27,19 +33,24 @@
         </button>
       </div>
       <div class="janelaLogin" id="janelaLogin">
-        <button id="fecharLogin" onclick="fecharLogin()">X</button>
+        <button class="btnFechar" id="fecharLogin" onclick="fecharLogin()">
+          X
+        </button>
         <input id="email" type="text" placeholder="E-Mail" />
         <input id="senha" type="password" placeholder="Senha" />
 
-        <button class="logar">Logar</button>
+        <button onclick="logar()" class="logar">Logar</button>
       </div>
 
       <div id="dados" class="dados">
         <table id="tabela"></table>
       </div>
     </div>
+
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+
     <script src="./script.js"></script>
   </body>
 </html>

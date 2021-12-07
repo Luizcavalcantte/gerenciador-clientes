@@ -129,7 +129,7 @@ function editar(i) {
         let todosUsuarios = doc.data().clientes;
         let temporario = ` <div id="${i}">
   <h3>Editando dados</h3>
-  <div class="inputsEditando"><div> <input id="editNome" value="" type="text"  placeholder="${todosUsuarios[i].Nome}" /> <input id="editVencimento" type="text" value="${todosUsuarios[i].Vencimento}" placeholder="Vencimento" /></div>
+  <div class="inputsEditando"><div> <input id="editNome" value="${todosUsuarios[i].Nome}" type="text"  placeholder="Nome" /> <input id="editVencimento" type="text" value="${todosUsuarios[i].Vencimento}" placeholder="Vencimento" /></div>
   
   <div>  <input id="editTelefone" type="text" value="${todosUsuarios[i].Telefone}" placeholder="Telefone" /> <input id="editPago" type="text" value="${todosUsuarios[i].Pago}" placeholder="Pago" /></div>
   </div>
@@ -217,3 +217,28 @@ function fecharLogin() {
   let login = document.getElementById("janelaLogin");
   login.style.display = "none";
 }
+
+function logar() {
+  let usuario = document.getElementById("email").value;
+  let senha = document.getElementById("senha").value;
+  console.log(usuario, senha);
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(usuario, senha)
+    .then((loggedUser) => {
+      console.log(firebase.auth().currentUser);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  let login = document.getElementById("janelaLogin");
+  login.style.display = "none";
+}
+
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    console.log(user);
+  } else {
+    console.log("ninguem logado");
+  }
+});

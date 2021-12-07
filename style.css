@@ -9,9 +9,8 @@ body {
   color: white;
 }
 .conteudo {
-  margin: auto;
   width: 100vw;
-  min-height: 900px;
+  min-height: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,6 +50,7 @@ body {
 
 .janelaLogin,
 .cadastro {
+  margin-bottom: 20px;
   padding-top: 40px;
   background-color: #928cd4;
   width: 250px;
@@ -62,7 +62,8 @@ body {
   border-radius: 5px;
 }
 
-#fecharLogin {
+#fecharLogin,
+#fecharCadastro {
   width: 20px;
   height: 20px;
   display: flex;
@@ -70,8 +71,10 @@ body {
   justify-content: center;
   font-size: 18px;
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 5px;
+  top: 5px;
+  border: none;
+  border-radius: 3px;
 }
 
 .logar {
@@ -82,17 +85,6 @@ body {
   margin-bottom: 10px;
 }
 
-#fecharCadastro {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
 input {
   margin-bottom: 10px;
   height: 35px;
@@ -138,6 +130,7 @@ button:hover {
 }
 
 .editando {
+  z-index: 1;
   padding: 20px;
   display: none;
   justify-content: space-around;
