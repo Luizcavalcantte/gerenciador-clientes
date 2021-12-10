@@ -9,11 +9,11 @@ body {
   color: white;
 }
 .conteudo {
-  width: 100vw;
-  min-height: 600px;
+  width: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto;
 
   background-color: #322e5a;
   text-align: center;
@@ -24,24 +24,23 @@ body {
   border: rgb(173, 182, 189) 5px solid;
 }
 .titulo {
-  position: relative;
-  display: flex;
   align-items: center;
   justify-content: center;
 
-  padding-left: 30px;
-  text-align: center;
   margin: 5px 0 10px 0;
 }
 #login {
   width: 50px;
   height: 30px;
   position: absolute;
-  top: 10px;
+  top: 8px;
   right: 10px;
 }
 
 #abrirCadastro {
+  position: absolute;
+  top: 8px;
+  right: 75px;
   width: 30px;
   height: 30px;
   margin-left: 30px;
@@ -106,12 +105,6 @@ input {
   justify-content: center;
 }
 
-td {
-  text-align: center;
-  padding: 5px;
-  background-color: gray;
-}
-
 .editar,
 .apagar {
   width: 60px;
@@ -159,7 +152,7 @@ button:hover {
   margin: 10px;
 }
 
-.Sim {
+.Pagou {
   background-color: rgb(51, 172, 51);
 }
 .Nao {
@@ -168,4 +161,33 @@ button:hover {
 
 td {
   max-width: 95px;
+}
+
+.dados {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.cliente {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 130px;
+  background-color: rgb(79, 84, 160);
+
+  margin: 5px;
+
+  border: 1px solid white;
+  border-radius: 10px;
+}
+
+.nome {
+  background-color: rgb(32, 32, 54);
+
+  top: 0;
+  left: 0;
+  width: 144px;
+  border-radius: 9px 9px 0px 0px;
 }

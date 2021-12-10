@@ -4,7 +4,7 @@ const telefone = document.getElementById("telefone");
 
 const cadastrar = document.getElementById("cadastrar");
 
-const tabela = document.getElementById("tabela");
+const tabela = document.getElementById("dados");
 const editando = document.getElementById("editando");
 
 //
@@ -37,7 +37,7 @@ function addUsuario() {
         Nome: nome.value,
         Vencimento: vencimento.value,
         Telefone: telefone.value,
-        Pago: "Sim",
+        Pago: "Pagou",
       }),
     })
     .then((doc) => {
@@ -54,6 +54,7 @@ function addUsuario() {
 }
 
 function atualizarTabela() {
+  tabela.innerHTML = "";
   db.collection("dados-clientes")
     .get()
     .then((snapshot) =>
@@ -61,27 +62,20 @@ function atualizarTabela() {
         let todosUsuarios = doc.data().clientes;
 
         function render() {
-          tabela.innerHTML = `<tr>
-        <td>Nome</td>
-        <td>Data</td>
-        <td>Telefone</td>
-        <td>Pago</td>
-        <td>Opções</td>
-      </tr>`;
-
           for (let i = 0; i < todosUsuarios.length; i++) {
-            let formato = ` <tr id="${i}">
-        <td>${todosUsuarios[i].Nome}</td>
-        <td>${todosUsuarios[i].Vencimento}</td>
-        <td>${todosUsuarios[i].Telefone}</td>
-        <td class=${todosUsuarios[i].Pago}>${todosUsuarios[i].Pago}</td>
-        <td><button class="btn editar" onclick="editar('${i}')">Editar</button>
+            let formato = ` <div class="cliente" id="${i}">
+        <h3 class="nome">${todosUsuarios[i].Nome}</h3>
+        <p>${todosUsuarios[i].Telefone}</p>
+        <p> Dia ${todosUsuarios[i].Vencimento}</p>
+        
+        <p class=${todosUsuarios[i].Pago}>${todosUsuarios[i].Pago}</p>
+        <p><button class="btn editar" onclick="editar('${i}')">Editar</button>
         <button class="btn apagar" onclick="apagar(
           '${todosUsuarios[i].Nome}',
           '${todosUsuarios[i].Vencimento}',
           '${todosUsuarios[i].Telefone}',
           '${todosUsuarios[i].Pago}'
-        )">Apagar</button></td>
+        )">Apagar</button></p>
       </tr>`;
 
             tabela.innerHTML += formato;
