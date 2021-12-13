@@ -1,11 +1,18 @@
-const nome = document.getElementById("nome");
-const vencimento = document.getElementById("vencimento");
-const telefone = document.getElementById("telefone");
+const inputNomeCadastro = document.getElementById("inputNomeCadastro");
+const inputVencimentoCadastro = document.getElementById(
+  "inputVencimentoCadastro"
+);
+const inputTelefoneCadastro = document.getElementById("inputTelefoneCadastro");
 
-const cadastrar = document.getElementById("cadastrar");
+const dadosClientes = document.getElementById("dadosClientes");
 
-const tabela = document.getElementById("dados");
-const editando = document.getElementById("editando");
+const janelaEditar = document.getElementById("janelaEditar");
+const janelaCadastro = document.getElementById("janelaCadastro");
+
+const fundoJanelas = document.getElementById("fundoJanelas");
+
+const inputEmailLogin = document.getElementById("inputEmailLogin");
+const inputSenhaLogin = document.getElementById("inputSenhaLogin");
 
 //
 
@@ -21,12 +28,12 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-//pegando dados do fb  vv
 let db = firebase.firestore();
 
-// firebase
+function cadastrarCliente() {
+  janelaCadastro.style.display = "none";
+  fundoJanelas.style.display = "none";
 
-function addUsuario() {
   // escrevendo no fb vv
 
   db.collection("dados-clientes")
@@ -34,51 +41,51 @@ function addUsuario() {
     .update({
       //tem q ter pelomenos 1 dado diferente, se nao, nada acontece vv
       clientes: firebase.firestore.FieldValue.arrayUnion({
-        Nome: nome.value,
-        Vencimento: vencimento.value,
-        Telefone: telefone.value,
+        Nome: inputNomeCadastro.value,
+        Vencimento: inputVencimentoCadastro.value,
+        Telefone: inputTelefoneCadastro.value,
         Pago: "Pagou",
       }),
     })
     .then((doc) => {
-      atualizarTabela();
+      atualizarDadosClientes();
       console.log("update feito com sucesso", doc);
     })
     .catch((err) => {
       console.log(err);
     });
 
-  nome.value = "";
-  vencimento.value = "";
-  telefone.value = "";
+  inputNomeCadastro.value = "";
+  inputVencimentoCadastro.value = "";
+  inputTelefoneCadastro.value = "";
 }
 
-function atualizarTabela() {
-  tabela.innerHTML = "";
+function atualizarDadosClientes() {
+  dadosClientes.innerHTML = "";
   db.collection("dados-clientes")
     .get()
     .then((snapshot) =>
       snapshot.forEach((doc) => {
-        let todosUsuarios = doc.data().clientes;
+        let todosClientes = doc.data().clientes;
 
         function render() {
-          for (let i = 0; i < todosUsuarios.length; i++) {
+          for (let i = 0; i < todosClientes.length; i++) {
             let formato = ` <div class="cliente" id="${i}">
-        <h3 class="nome">${todosUsuarios[i].Nome}</h3>
-        <p>${todosUsuarios[i].Telefone}</p>
-        <p> Dia ${todosUsuarios[i].Vencimento}</p>
+        <h3 class="nomeClientes">${todosClientes[i].Nome}</h3>
+        <p>${todosClientes[i].Telefone}</p>
+        <p> Dia ${todosClientes[i].Vencimento}</p>
         
-        <p class=${todosUsuarios[i].Pago}>${todosUsuarios[i].Pago}</p>
-        <p><button class="btn editar" onclick="editar('${i}')">Editar</button>
-        <button class="btn apagar" onclick="apagar(
-          '${todosUsuarios[i].Nome}',
-          '${todosUsuarios[i].Vencimento}',
-          '${todosUsuarios[i].Telefone}',
-          '${todosUsuarios[i].Pago}'
+        <p class=${todosClientes[i].Pago}>${todosClientes[i].Pago}</p>
+        <p><button class="btnEditar" onclick="editar('${i}')">Editar</button>
+        <button class="btnApagar" onclick="apagar(
+          '${todosClientes[i].Nome}',
+          '${todosClientes[i].Vencimento}',
+          '${todosClientes[i].Telefone}',
+          '${todosClientes[i].Pago}'
         )">Apagar</button></p>
       </tr>`;
 
-            tabela.innerHTML += formato;
+            dadosClientes.innerHTML += formato;
           }
         }
 
@@ -86,13 +93,12 @@ function atualizarTabela() {
       })
     );
 }
-atualizarTabela();
+atualizarDadosClientes();
 
 function apagar(nome, vencimento, telefone, pago) {
   db.collection("dados-clientes")
     .doc("EoFbN8D2PNYrjMh7Wwjh")
     .update({
-      //tem q ter pelomenos 1 dado diferente, se nao, nada acontece vv
       clientes: firebase.firestore.FieldValue.arrayRemove({
         Nome: nome,
         Vencimento: vencimento,
@@ -102,7 +108,7 @@ function apagar(nome, vencimento, telefone, pago) {
     })
 
     .then((doc) => {
-      atualizarTabela();
+      atualizarDadosClientes();
       console.log("item deletado com sucesso", doc);
     })
     .catch((err) => {
@@ -114,31 +120,33 @@ function apagar(nome, vencimento, telefone, pago) {
 //
 //
 function editar(i) {
-  editando.style.display = "flex";
+  fundoJanelas.style.display = "flex";
+  janelaEditar.style.display = "flex";
 
   db.collection("dados-clientes")
     .get()
     .then((snapshot) =>
       snapshot.forEach((doc) => {
-        let todosUsuarios = doc.data().clientes;
+        let todosClientes = doc.data().clientes;
         let temporario = ` <div id="${i}">
   <h3>Editando dados</h3>
-  <div class="inputsEditando"><div> <input id="editNome" value="${todosUsuarios[i].Nome}" type="text"  placeholder="Nome" /> <input id="editVencimento" type="text" value="${todosUsuarios[i].Vencimento}" placeholder="Vencimento" /></div>
+  <div class="inputsEditando"><div> <input id="editNome" value="${todosClientes[i].Nome}" type="text"  placeholder="Nome" /> <input id="editVencimento" type="text" value="${todosClientes[i].Vencimento}" placeholder="Vencimento" /></div>
   
-  <div>  <input id="editTelefone" type="text" value="${todosUsuarios[i].Telefone}" placeholder="Telefone" /> <input id="editPago" type="text" value="${todosUsuarios[i].Pago}" placeholder="Pago" /></div>
+  <div>  <input id="editTelefone" type="text" value="${todosClientes[i].Telefone}" placeholder="Telefone" /> <input id="editPago" type="text" value="${todosClientes[i].Pago}" placeholder="Pago" /></div>
   </div>
-  <p><button id="confirmar" class="btn editar" onclick="confirmar('${i}')">Confirmar</button>
-  <button id="cancelar" class="btn apagar" onclick="cancelar()">Cancelar</button></p>
+  <p><button id="confirmar" class="btns" onclick="confirmar('${i}')">Confirmar</button>
+  <button id="cancelar" class="btns" onclick="cancelar()">Cancelar</button></p>
 </div>`;
 
-        editando.innerHTML += temporario;
+        janelaEditar.innerHTML += temporario;
       })
     );
 }
 
 function cancelar() {
-  editando.style.display = "none";
-  editando.innerHTML = "";
+  fundoJanelas.style.display = "none";
+  janelaEditar.style.display = "none";
+  janelaEditar.innerHTML = "";
 }
 
 function confirmar(i) {
@@ -147,7 +155,8 @@ function confirmar(i) {
   const editandoTelefone = document.getElementById("editTelefone").value;
   const editandoPago = document.getElementById("editPago").value;
 
-  editando.style.display = "none";
+  janelaEditar.style.display = "none";
+  fundoJanelas.style.display = "none";
 
   //
   db.collection("dados-clientes")
@@ -171,7 +180,7 @@ function confirmar(i) {
             clientes: todosUsuarios,
           })
           .then((doc) => {
-            atualizarTabela();
+            atualizarDadosClientes();
             console.log("update feito com sucesso", doc);
           })
           .catch((err) => {
@@ -185,40 +194,42 @@ function confirmar(i) {
 
   //
 
-  editando.innerHTML = "";
+  janelaEditar.innerHTML = "";
 
-  atualizarTabela();
+  atualizarDadosClientes();
 }
 
 function abrirCadastro() {
-  let cadastro = document.getElementById("cadastro");
+  fundoJanelas.style.display = "flex";
 
-  cadastro.style.display = "flex";
+  janelaCadastro.style.display = "flex";
 }
 
-function fecharCadastro() {
-  let cadastro = document.getElementById("cadastro");
+function fecharJanelaCadastro() {
+  fundoJanelas.style.display = "none";
 
-  cadastro.style.display = "none";
+  janelaCadastro.style.display = "none";
 }
 
 function abrirLogin() {
+  fundoJanelas.style.display = "flex";
   let login = document.getElementById("janelaLogin");
   login.style.display = "flex";
 }
 
-function fecharLogin() {
+function fecharJanelaLogin() {
+  fundoJanelas.style.display = "none";
   let login = document.getElementById("janelaLogin");
   login.style.display = "none";
 }
 
-function logar() {
-  let usuario = document.getElementById("email").value;
-  let senha = document.getElementById("senha").value;
-  console.log(usuario, senha);
+function fazerLogin() {
+  fundoJanelas.style.display = "none";
+
+  console.log(inputEmailLogin.value, inputSenhaLogin.value);
   firebase
     .auth()
-    .signInWithEmailAndPassword(usuario, senha)
+    .signInWithEmailAndPassword(inputEmailLogin.value, inputSenhaLogin.value)
     .then((loggedUser) => {
       console.log(firebase.auth().currentUser);
     })

@@ -8,39 +8,42 @@
     <title>Cadastro Clientes</title>
   </head>
   <body>
+    <div id="fundoJanelas"></div>
     <div class="conteudo">
-      <div id="editando" class="editando"></div>
+      <div id="janelaEditar"></div>
       <h1 class="titulo">Clientes</h1>
       <button id="abrirCadastro" onclick="abrirCadastro()">+</button>
-      <button onclick="abrirLogin()" id="login">Login</button>
+      <button onclick="abrirLogin()" id="abrirLogin">Login</button>
 
-      <div id="cadastro" class="cadastro">
-        <button
-          class="btnFechar"
-          id="fecharCadastro"
-          onclick="fecharCadastro()"
-        >
-          X
-        </button>
-        <input id="nome" type="text" placeholder="Nome" />
-        <input id="vencimento" type="number" placeholder="Vencimento" />
-        <input id="telefone" type="number" placeholder="Telefone" />
+      <div id="janelaCadastro">
+        <button class="btnFechar" onclick="fecharJanelaCadastro()">X</button>
+        <h3>Novo Cliente</h3>
+        <input id="inputNomeCadastro" type="text" placeholder="Nome" />
+        <input
+          id="inputVencimentoCadastro"
+          type="number"
+          placeholder="Vencimento"
+        />
+        <input
+          id="inputTelefoneCadastro"
+          type="number"
+          placeholder="Telefone"
+        />
 
-        <button id="cadastrar" class="btn cadastrar" onclick="addUsuario()">
-          Cadastrar
+        <button class="btns" onclick="cadastrarCliente()">Cadastrar</button>
+      </div>
+      <div id="janelaLogin">
+        <h3>Faça seu login</h3>
+        <button class="btnFechar" onclick="fecharJanelaLogin()">X</button>
+        <input id="inputEmailLogin" type="text" placeholder="E-Mail" />
+        <input id="inputSenhaLogin" type="password" placeholder="Senha" />
+
+        <button class="btns" onclick="fazerLogin()" class="btn fazerLogin">
+          Fazer Login
         </button>
       </div>
-      <div class="janelaLogin" id="janelaLogin">
-        <button class="btnFechar" id="fecharLogin" onclick="fecharLogin()">
-          X
-        </button>
-        <input id="email" type="text" placeholder="E-Mail" />
-        <input id="senha" type="password" placeholder="Senha" />
 
-        <button onclick="logar()" class="logar">Logar</button>
-      </div>
-
-      <div id="dados" class="dados"></div>
+      <div id="dadosClientes" class="dados"></div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>

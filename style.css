@@ -14,27 +14,16 @@ body {
   flex-direction: column;
   align-items: center;
   margin: auto;
-
   background-color: #322e5a;
   text-align: center;
   position: relative;
-
   margin-top: 30px;
   border-radius: 10px;
   border: rgb(173, 182, 189) 5px solid;
 }
 .titulo {
   align-items: center;
-  justify-content: center;
-
   margin: 5px 0 10px 0;
-}
-#login {
-  width: 50px;
-  height: 30px;
-  position: absolute;
-  top: 8px;
-  right: 10px;
 }
 
 #abrirCadastro {
@@ -43,17 +32,26 @@ body {
   right: 75px;
   width: 30px;
   height: 30px;
-  margin-left: 30px;
   font-size: 25px;
 }
 
-.janelaLogin,
-.cadastro {
-  margin-bottom: 20px;
+#abrirLogin {
+  width: 50px;
+  height: 30px;
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+#janelaLogin,
+#janelaCadastro,
+#janelaEditar {
+  z-index: 2;
+  margin-top: 50px;
   padding-top: 40px;
   background-color: #928cd4;
   width: 250px;
-  position: relative;
+  position: absolute;
   display: none;
   flex-direction: column;
   align-items: center;
@@ -61,22 +59,17 @@ body {
   border-radius: 5px;
 }
 
-#fecharLogin,
-#fecharCadastro {
+.btnFechar {
   width: 20px;
   height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
+  border: none;
+  border-radius: 3px;
   position: absolute;
   right: 5px;
   top: 5px;
-  border: none;
-  border-radius: 3px;
 }
 
-.logar {
+.btns {
   height: 30px;
   border: none;
   border-radius: 5px;
@@ -91,28 +84,18 @@ input {
   width: 160px;
 }
 
-.cadastro button {
-  height: 30px;
-  border: none;
-  border-radius: 5px;
-  padding: 0px 5px 0px 5px;
-  margin-bottom: 10px;
-}
-
 .dados {
   display: flex;
   align-content: center;
   justify-content: center;
 }
 
-.editar,
-.apagar {
+.btnEditar,
+.btnApagar {
   width: 60px;
   height: 25px;
   border: none;
   border-radius: 5px;
-}
-.editar {
   margin-bottom: 5px;
 }
 
@@ -122,45 +105,11 @@ button:hover {
   border: none;
 }
 
-.editando {
-  z-index: 1;
-  padding: 20px;
-  display: none;
-  justify-content: space-around;
-  justify-items: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  background-color: rgba(9, 188, 138, 0.9);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  border-radius: 10px;
-  border: rgb(173, 182, 189) 5px solid;
-  font-weight: bolder;
-  color: #183a37;
-}
-
-.editando button {
-  width: 100px;
-  height: 35px;
-}
-.editando input,
-.editando button {
-  margin: 10px;
-}
-
 .Pagou {
   background-color: rgb(51, 172, 51);
 }
 .Nao {
   background-color: rgb(236, 70, 70);
-}
-
-td {
-  max-width: 95px;
 }
 
 .dados {
@@ -176,18 +125,25 @@ td {
   justify-content: space-between;
   height: 130px;
   background-color: rgb(79, 84, 160);
-
   margin: 5px;
-
   border: 1px solid white;
   border-radius: 10px;
 }
 
-.nome {
+.nomeClientes {
   background-color: rgb(32, 32, 54);
-
   top: 0;
   left: 0;
   width: 144px;
   border-radius: 9px 9px 0px 0px;
+}
+
+#fundoJanelas {
+  top: 0;
+  display: none;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 1;
 }
