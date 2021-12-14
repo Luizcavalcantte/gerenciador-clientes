@@ -238,6 +238,13 @@ function fazerLogin() {
     .signInWithEmailAndPassword(inputEmailLogin.value, inputSenhaLogin.value)
     .then((loggedUser) => {
       console.log(firebase.auth().currentUser);
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          alert("Logado com sucesso");
+        } else {
+          console.log("ninguem logado");
+        }
+      });
     })
     .catch((error) => {
       console.log(error);
@@ -246,10 +253,22 @@ function fazerLogin() {
   login.style.display = "none";
 }
 
-firebase.auth().onAuthStateChanged((user) => {
-  if (user) {
-    console.log(user);
-  } else {
-    console.log("ninguem logado");
-  }
-});
+function logout() {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log("usuario deslogado");
+
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          alert("Logado com sucesso");
+        } else {
+          alert("ninguem logado");
+        }
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
