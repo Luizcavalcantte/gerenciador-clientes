@@ -96,24 +96,30 @@ function atualizarDadosClientes() {
 atualizarDadosClientes();
 
 function apagar(nome, vencimento, telefone, pago) {
-  db.collection("dados-clientes")
-    .doc("EoFbN8D2PNYrjMh7Wwjh")
-    .update({
-      clientes: firebase.firestore.FieldValue.arrayRemove({
-        Nome: nome,
-        Vencimento: vencimento,
-        Telefone: telefone,
-        Pago: pago,
-      }),
-    })
+  let confirmacao = prompt(
+    "Confirme o nome do cliente para apagalo " + '"' + nome + '"'
+  );
+  confirmacao;
+  if (confirmacao === nome) {
+    db.collection("dados-clientes")
+      .doc("EoFbN8D2PNYrjMh7Wwjh")
+      .update({
+        clientes: firebase.firestore.FieldValue.arrayRemove({
+          Nome: nome,
+          Vencimento: vencimento,
+          Telefone: telefone,
+          Pago: pago,
+        }),
+      })
 
-    .then((doc) => {
-      atualizarDadosClientes();
-      console.log("item deletado com sucesso", doc);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .then((doc) => {
+        atualizarDadosClientes();
+        console.log("item deletado com sucesso", doc);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
 
 //
