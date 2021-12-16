@@ -75,7 +75,7 @@ function atualizarDadosClientes() {
         <p>${todosClientes[i].Telefone}</p>
         <p> Dia ${todosClientes[i].Vencimento}</p>
         
-        <p class=${todosClientes[i].Pago}>${todosClientes[i].Pago}</p>
+        <p  class="${todosClientes[i].Pago}">${todosClientes[i].Pago}</p>
         <p><button class="btnEditar" onclick="editar('${i}')">Editar</button>
         <button class="btnApagar" onclick="apagar(
           '${todosClientes[i].Nome}',
